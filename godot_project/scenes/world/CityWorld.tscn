@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/vehicles/motorcycle_controller.gd" id="2_moto"]
+[ext_resource type="Script" path="res://scripts/world/camera_rig.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/world/weather_system.gd" id="4_weather"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 10.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moto"]
+radius = 14.0
+height = 34.0
+
+[node name="CityWorld" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.38, 0.44, 0.66, 1)
+
+[node name="GroundTileMap" type="TileMapLayer" parent="."]
+
+[node name="SidewalkTileMap" type="TileMapLayer" parent="."]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(1050, 1082)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_player")
+
+[node name="InteractionArea" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/InteractionArea"]
+shape = SubResource("CircleShape2D_player")
+
+[node name="Motorcycle" type="CharacterBody2D" parent="."]
+position = Vector2(1170, 1088)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("2_moto")
+
+[node name="Sprite2D" type="Sprite2D" parent="Motorcycle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motorcycle"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_moto")
+
+[node name="Headlight" type="PointLight2D" parent="Motorcycle"]
+enabled = false
+color = Color(1, 0.94, 0.72, 1)
+energy = 1.3
+
+[node name="EngineAudio" type="AudioStreamPlayer2D" parent="Motorcycle"]
+
+[node name="CameraRig" type="Camera2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(1050, 1082)
+script = ExtResource("3_cam")
+follow_target = NodePath("../Player")
+
+[node name="WeatherSystem" type="Node2D" parent="."]
+script = ExtResource("4_weather")
+night_modulate_path = NodePath("../CanvasModulate")

@@ -1,0 +1,6 @@
+{
+  "name": "AMEYO — Rainy Night Exploration",
+  "description": "An atmospheric 2D pixel-art open-world exploration game set in a rainy Japanese city at 2 AM, on foot and by motorcycle.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
