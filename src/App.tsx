@@ -56,7 +56,7 @@ export default function App() {
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('autostart') === '1') {
-      engine.startGame(params.get('mode') === 'survival' ? 'survival' : 'exploration');
+      engine.startGame(['survival', 'zombie'].includes(params.get('mode') ?? '') ? 'survival' : 'exploration');
     }
 
     return () => {

@@ -91,7 +91,7 @@ export const TitleOverlay: React.FC<TitleOverlayProps> = ({
               }}
               className="px-5 py-3 rounded-md bg-rose-500 hover:bg-rose-400 active:translate-y-px text-slate-950 font-display font-semibold text-sm tracking-wide transition-colors cursor-pointer whitespace-nowrap shrink-0 shadow-[0_6px_22px_rgba(244,63,94,0.30)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-300"
             >
-              Survival Mode
+              Zombie Mode
             </button>
 
             <button

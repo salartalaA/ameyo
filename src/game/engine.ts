@@ -681,7 +681,7 @@ export class AmeyoEngine {
         this.audio.playExplosion();
       } else if (event.type === 'victory') {
         this.audio.playSurvivalSting('victory');
-        this.showToast(`Survival complete — ${this.survival.score} zombies down`);
+        this.showToast(`Run complete — ${this.survival.score} zombies down`);
       } else if (event.type === 'defeat') {
         this.audio.playSurvivalSting('defeat');
       }
@@ -712,7 +712,7 @@ export class AmeyoEngine {
     if (this.variant === 'survival') {
       const near = findNearestInteractable(this.player, this.moto, INTERACTABLES);
       if (!near || near.kind !== 'motorcycle') {
-        this.showToast(`Survival — ${SURVIVAL_TARGET_SCORE} kills to win · stay moving`);
+        this.showToast(`Zombie Mode — ${SURVIVAL_TARGET_SCORE} kills to win · stay moving`);
         return;
       }
     }

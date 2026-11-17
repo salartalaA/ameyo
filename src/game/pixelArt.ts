@@ -519,6 +519,20 @@ export function drawZombie(ctx: CanvasRenderingContext2D, z: ZombieState, time: 
   const oy = Math.round(y - 25 + Math.abs(walk) * 1.4);
   const reach = z.facing === 'left' ? -lunge : z.facing === 'right' ? lunge : 0;
 
+  // Tight dark outline: silhouette blocks inflated by 1px, drawn first so the
+  // colored parts on top leave a crisp rim that hugs the body.
+  const OUTLINE = '#070b16';
+  const legA0 = Math.round(walk * 2);
+  px(ctx, ox + 3, oy + 18 + Math.max(0, legA0), 5, 9, OUTLINE);
+  px(ctx, ox + 8, oy + 18 + Math.max(0, -legA0), 5, 9, OUTLINE);
+  px(ctx, ox + 3, oy + 10, 11, 11, OUTLINE); // torso
+  const armY0 = z.facing === 'up' ? oy + 10 : oy + 12;
+  const armX0 = z.facing === 'left' ? ox + 1 - reach : z.facing === 'right' ? ox + 13 + reach : ox + 3;
+  const armW0 = z.facing === 'left' || z.facing === 'right' ? 5 : 2;
+  const armH0 = z.facing === 'up' ? 5 : 6;
+  px(ctx, armX0 - 1, armY0 - 1, armW0 + 2, armH0 + 2, OUTLINE);
+  px(ctx, ox + 3, oy, 11, 13, OUTLINE); // head
+
   // Legs
   const legA = Math.round(walk * 2);
   px(ctx, ox + 4, oy + 19 + Math.max(0, legA), 3, 6, pants);
